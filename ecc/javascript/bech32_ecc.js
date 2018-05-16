@@ -1,4 +1,3 @@
-// test
 var CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
 var GENERATOR = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
 
@@ -148,9 +147,9 @@ var GF1024_LOG = [
   452, 710, 552, 128, 612, 600, 275, 322, 193
 ];
 
-module.exports = {
-  check: check,
-};
+// module.exports = {
+//   check: check,
+// };
 
 function syndrome (residue) {
   var low = residue & 0x1f;
@@ -259,7 +258,8 @@ function range (from, to) {
   return ret;
 }
 
-function check (bechString, validHrp) {
+// function check (bechString, validHrp) {
+function bech32_ecc_check (bechString, validHrp) {
   if (bechString.length > 90) {
       return {error:"Too long", pos:range(90, bechString.length)};
   }

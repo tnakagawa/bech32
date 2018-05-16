@@ -18,12 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-var bech32 = require('./bech32');
+// var bech32 = require('./bech32');
 
-module.exports = {
-  encode: encode,
-  decode: decode
-};
+// module.exports = {
+//   encode: encode,
+//   decode: decode
+// };
 
 function convertbits (data, frombits, tobits, pad) {
   var acc = 0;
@@ -52,8 +52,10 @@ function convertbits (data, frombits, tobits, pad) {
   return ret;
 }
 
-function decode (hrp, addr) {
-  var dec = bech32.decode(addr);
+// function decode (hrp, addr) {
+function segwit_addr_decode (hrp, addr) {
+//  var dec = bech32.decode(addr);
+  var dec = bech32_decode(addr);
   if (dec === null || dec.hrp !== hrp || dec.data.length < 1 || dec.data[0] > 16) {
     return null;
   }
@@ -67,9 +69,12 @@ function decode (hrp, addr) {
   return {version: dec.data[0], program: res};
 }
 
-function encode (hrp, version, program) {
-  var ret = bech32.encode(hrp, [version].concat(convertbits(program, 8, 5, true)));
-  if (decode(hrp, ret) === null) {
+// function encode (hrp, version, program) {
+function segwit_addr_encode (hrp, version, program) {
+//  var ret = bech32.encode(hrp, [version].concat(convertbits(program, 8, 5, true)));
+  var ret = bech32_encode(hrp, [version].concat(convertbits(program, 8, 5, true)));
+  // if (decode(hrp, ret) === null) {
+  if (segwit_addr_decode(hrp, ret) === null) {
     return null;
   }
   return ret;

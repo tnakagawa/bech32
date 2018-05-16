@@ -21,10 +21,10 @@
 var CHARSET = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l';
 var GENERATOR = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
 
-module.exports = {
-  decode: decode,
-  encode: encode,
-};
+// module.exports = {
+//   decode: decode,
+//   encode: encode,
+// };
 
 
 function polymod (values) {
@@ -68,7 +68,8 @@ function createChecksum (hrp, data) {
   return ret;
 }
 
-function encode (hrp, data) {
+//function encode (hrp, data) {
+function bech32_encode (hrp, data) {
   var combined = data.concat(createChecksum(hrp, data));
   var ret = hrp + '1';
   for (var p = 0; p < combined.length; ++p) {
@@ -77,7 +78,8 @@ function encode (hrp, data) {
   return ret;
 }
 
-function decode (bechString) {
+//function decode (bechString) {
+function bech32_decode (bechString) {
   var p;
   var has_lower = false;
   var has_upper = false;

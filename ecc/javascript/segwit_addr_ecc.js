@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-var bech32_ecc = require('./bech32_ecc');
+// var bech32_ecc = require('./bech32_ecc');
 
-module.exports = {
-  check: check
-};
+// module.exports = {
+//   check: check
+// };
 
 function convertbits (data, frombits, tobits, pad) {
   var acc = 0;
@@ -51,7 +51,8 @@ function convertbits (data, frombits, tobits, pad) {
   return ret;
 }
 
-function check (addr, validHrp) {
+// function check (addr, validHrp) {
+function segwit_addr_ecc_check (addr, validHrp) {
   if (addr.length < 14) {
     return {error:"Too short", pos:null};
   }
@@ -61,7 +62,8 @@ function check (addr, validHrp) {
   if ((addr.length % 8) == 0 || (addr.length % 8) == 3 || (addr.length % 8) == 5) {
     return {error:"Invalid length", pos:null};
   }
-  var dec = bech32_ecc.check(addr, validHrp);
+  // var dec = bech32_ecc.check(addr, validHrp);
+  var dec = bech32_ecc_check(addr, validHrp);
   if (dec.error !== null) {
     return {error:dec.error, pos:dec.pos};
   }
